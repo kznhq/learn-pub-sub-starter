@@ -1,3 +1,5 @@
+package pubsub
+
 import (
     "context"
     "encoding/json"
@@ -6,12 +8,12 @@ import (
 )
 
 func PublishJSON[T any](ch *amqp.Channel, exchange, key string, val T) error {
-    bytes, err := JSON.Marshal(val)
+    bytes, err := json.Marshal(val)
     if err != nil {
         return err
     }   
 
-    message = amqp.Publishing {
+    message := amqp.Publishing {
         ContentType: "application/json",
         Body: bytes,
     }
